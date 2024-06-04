@@ -65,7 +65,6 @@ const UserListDialog = () => {
           groupImage: storageId,
         });
       }
-      console.log("🚀 ~ UserListDialog ~ users:", users);
 
       dialogCloseRef.current?.click();
       setSelectedUsers([]);

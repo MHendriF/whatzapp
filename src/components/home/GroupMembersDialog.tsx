@@ -19,7 +19,6 @@ const GroupMembersDialog = ({ selectedConversation }: GroupMembersDialogProps) =
   const users = useQuery(api.users.getGroupMembers, {
     conversationId: selectedConversation._id,
   });
-  console.log("🚀 ~ selectedConversation ~ users:", selectedConversation);
 
   return (
     <Dialog>

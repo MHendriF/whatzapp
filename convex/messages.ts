@@ -46,6 +46,7 @@ export const sendTextMessage = mutation({
     // TODO => add @gpt check later
     if (args.content.startsWith("@gpt")) {
       // Schedule the chat action to run immediately
+      console.log("🚀 ~ @gpt: run api.openai.chat");
       await ctx.scheduler.runAfter(0, api.openai.chat, {
         messageBody: args.content,
         conversation: args.conversation,
@@ -53,6 +54,7 @@ export const sendTextMessage = mutation({
     }
 
     if (args.content.startsWith("@dall-e")) {
+      console.log("🚀 ~ @dall-e: run api.openai.dall_e");
       await ctx.scheduler.runAfter(0, api.openai.dall_e, {
         messageBody: args.content,
         conversation: args.conversation,

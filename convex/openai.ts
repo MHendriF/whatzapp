@@ -25,14 +25,16 @@ export const chat = action({
         },
       ],
     });
+    console.log("🚀 ~ handler: ~ res:", res);
 
     const messageContent = res.choices[0].message.content;
 
-    await ctx.runMutation(api.messages.sendChatGPTMessage, {
+    const resMutation = await ctx.runMutation(api.messages.sendChatGPTMessage, {
       content: messageContent ?? "I'm sorry, I don't have a response for that",
       conversation: args.conversation,
       messageType: "text",
     });
+    console.log("🚀 ~ handler: ~ resMutation:", resMutation);
   },
 });
 
