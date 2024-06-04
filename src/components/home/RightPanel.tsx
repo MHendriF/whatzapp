@@ -7,8 +7,9 @@ import ChatPlaceHolder from "@/components/home/ChatPlaceHolder";
 import GroupMembersDialog from "./GroupMembersDialog";
 
 const RightPanel = () => {
-  const selectedConversation = null;
+  const selectedConversation = true;
   if (!selectedConversation) return <ChatPlaceHolder />;
+  const isGroup = true;
 
   const conversationName = "John Doe";
 
@@ -26,7 +27,7 @@ const RightPanel = () => {
             </Avatar>
             <div className="flex flex-col">
               <p>{conversationName}</p>
-              {/* {isGroup && <GroupMembersDialog />} */}
+              {isGroup && <GroupMembersDialog />}
             </div>
           </div>
 
