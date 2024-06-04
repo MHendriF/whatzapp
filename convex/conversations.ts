@@ -22,8 +22,8 @@ export const createConversation = mutation({
       .filter((q) =>
         q.or(
           q.eq(q.field("participants"), args.participants),
-          q.eq(q.field("participants"), args.participants.reverse())
-        )
+          q.eq(q.field("participants"), args.participants.reverse()),
+        ),
       )
       .first();
 
@@ -57,9 +57,7 @@ export const getMyConversations = query({
 
     const user = await ctx.db
       .query("users")
-      .withIndex("by_tokenIdentifier", (q) =>
-        q.eq("tokenIdentifier", identity.tokenIdentifier)
-      )
+      .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", identity.tokenIdentifier))
       .unique();
 
     if (!user) throw new ConvexError("User not found");
@@ -75,9 +73,7 @@ export const getMyConversations = query({
         let userDetails = {};
 
         if (!conversation.isGroup) {
-          const otherUserId = conversation.participants.find(
-            (id) => id !== user._id
-          );
+          const otherUserId = conversation.participants.find((id) => id !== user._id);
           const userProfile = await ctx.db
             .query("users")
             .filter((q) => q.eq(q.field("_id"), otherUserId))
@@ -98,7 +94,7 @@ export const getMyConversations = query({
           ...conversation,
           lastMessage: lastMessage[0] || null,
         };
-      })
+      }),
     );
 
     return conversationsWithDetails;
@@ -122,9 +118,7 @@ export const kickUser = mutation({
     if (!conversation) throw new ConvexError("Conversation not found");
 
     await ctx.db.patch(args.conversationId, {
-      participants: conversation.participants.filter(
-        (id) => id !== args.userId
-      ),
+      participants: conversation.participants.filter((id) => id !== args.userId),
     });
   },
 });

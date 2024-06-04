@@ -17,8 +17,7 @@ export const chat = action({
       messages: [
         {
           role: "system",
-          content:
-            "You are a terse bot in a group chat responding to questions with 1-sentence answers",
+          content: "You are a terse bot in a group chat responding to questions with 1-sentence answers",
         },
         {
           role: "user",

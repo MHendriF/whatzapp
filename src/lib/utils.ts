@@ -40,27 +40,12 @@ export function formatDate(date_ms: number) {
 
   // Check if it's a different day of the week
   if (provided_date.getDay() < current_date.getDay()) {
-    let days = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
+    let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     return days[provided_date.getDay()];
   }
 
   // If none of the above conditions match, return in a different format
-  return (
-    provided_date.getMonth() +
-    1 +
-    "/" +
-    provided_date.getDate() +
-    "/" +
-    provided_date.getFullYear()
-  );
+  return provided_date.getMonth() + 1 + "/" + provided_date.getDate() + "/" + provided_date.getFullYear();
 }
 
 export const isSameDay = (timestamp1: number, timestamp2: number): boolean => {
@@ -83,10 +68,7 @@ export const getRelativeDateTime = (message: any, previousMessage: any) => {
 
   const messageDate = new Date(message._creationTime);
 
-  if (
-    !previousMessage ||
-    !isSameDay(previousMessage._creationTime, messageDate.getTime())
-  ) {
+  if (!previousMessage || !isSameDay(previousMessage._creationTime, messageDate.getTime())) {
     if (isSameDay(messageDate.getTime(), today.getTime())) {
       return "Today";
     } else if (isSameDay(messageDate.getTime(), yesterday.getTime())) {

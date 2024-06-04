@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ListFilter,
-  LogOut,
-  MessageSquareDiff,
-  Search,
-  User,
-} from "lucide-react";
+import { ListFilter, LogOut, MessageSquareDiff, Search, User } from "lucide-react";
 import { Input } from "../ui/input";
 import ThemeSwitch from "./ThemeSwitch";
 import Conversation from "./Conversation";
@@ -17,10 +11,7 @@ import { api } from "../../../convex/_generated/api";
 
 const LeftPanel = () => {
   const { isAuthenticated } = useConvexAuth();
-  const conversations = useQuery(
-    api.conversations.getMyConversations,
-    isAuthenticated ? undefined : "skip"
-  );
+  const conversations = useQuery(api.conversations.getMyConversations, isAuthenticated ? undefined : "skip");
 
   return (
     <div className="w-1/4 border-gray-600 border-r">
@@ -37,10 +28,7 @@ const LeftPanel = () => {
         <div className="p-3 flex items-center">
           {/* Search */}
           <div className="relative h-10 mx-3 flex-1">
-            <Search
-              className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 z-10"
-              size={18}
-            />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 z-10" size={18} />
             <Input
               type="text"
               placeholder="Search or start a new chat"
@@ -53,18 +41,13 @@ const LeftPanel = () => {
 
       {/* Chat List */}
       <div className="my-3 flex flex-col gap-0 max-h-[80%] overflow-auto">
-        {conversations?.map((conversation) => (
-          <Conversation key={conversation._id} conversation={conversation} />
-        ))}
+        {conversations?.map((conversation) => <Conversation key={conversation._id} conversation={conversation} />)}
 
         {conversations?.length === 0 && (
           <>
-            <p className="text-center text-gray-500 text-sm mt-3">
-              No conversations yet
-            </p>
+            <p className="text-center text-gray-500 text-sm mt-3">No conversations yet</p>
             <p className="text-center text-gray-500 text-sm mt-3 ">
-              We understand {"you're"} an introvert, but {"you've"} got to start
-              somewhere 😊
+              We understand {"you're"} an introvert, but {"you've"} got to start somewhere 😊
             </p>
           </>
         )}

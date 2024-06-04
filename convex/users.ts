@@ -24,9 +24,7 @@ export const updateUser = internalMutation({
   async handler(ctx, args) {
     const user = await ctx.db
       .query("users")
-      .withIndex("by_tokenIdentifier", (q) =>
-        q.eq("tokenIdentifier", args.tokenIdentifier)
-      )
+      .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", args.tokenIdentifier))
       .unique();
 
     if (!user) {
@@ -44,9 +42,7 @@ export const deleteUser = internalMutation({
   async handler(ctx, args) {
     const user = await ctx.db
       .query("users")
-      .withIndex("by_tokenIdentifier", (q) =>
-        q.eq("tokenIdentifier", args.tokenIdentifier)
-      )
+      .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", args.tokenIdentifier))
       .unique();
 
     if (!user) {
@@ -62,9 +58,7 @@ export const setUserOnline = internalMutation({
   handler: async (ctx, args) => {
     const user = await ctx.db
       .query("users")
-      .withIndex("by_tokenIdentifier", (q) =>
-        q.eq("tokenIdentifier", args.tokenIdentifier)
-      )
+      .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", args.tokenIdentifier))
       .unique();
 
     if (!user) {
@@ -80,9 +74,7 @@ export const setUserOffline = internalMutation({
   handler: async (ctx, args) => {
     const user = await ctx.db
       .query("users")
-      .withIndex("by_tokenIdentifier", (q) =>
-        q.eq("tokenIdentifier", args.tokenIdentifier)
-      )
+      .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", args.tokenIdentifier))
       .unique();
 
     if (!user) {
@@ -102,9 +94,7 @@ export const getUsers = query({
     }
 
     const users = await ctx.db.query("users").collect();
-    return users.filter(
-      (user) => user.tokenIdentifier !== identity.tokenIdentifier
-    );
+    return users.filter((user) => user.tokenIdentifier !== identity.tokenIdentifier);
   },
 });
 
@@ -118,9 +108,7 @@ export const getMe = query({
 
     const user = await ctx.db
       .query("users")
-      .withIndex("by_tokenIdentifier", (q) =>
-        q.eq("tokenIdentifier", identity.tokenIdentifier)
-      )
+      .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", identity.tokenIdentifier))
       .unique();
 
     if (!user) {
@@ -149,9 +137,7 @@ export const getGroupMembers = query({
     }
 
     const users = await ctx.db.query("users").collect();
-    const groupMembers = users.filter((user) =>
-      conversation.participants.includes(user._id)
-    );
+    const groupMembers = users.filter((user) => conversation.participants.includes(user._id));
 
     return groupMembers;
   },

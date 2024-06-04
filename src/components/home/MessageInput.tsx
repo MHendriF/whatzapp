@@ -12,8 +12,7 @@ import MediaDropdown from "./MediaDropdown";
 
 const MessageInput = () => {
   const [msgText, setMsgText] = useState("");
-  const { ref, isComponentVisible, setIsComponentVisible } =
-    useComponentVisible(false);
+  const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(false);
   const { selectedConversation } = useConversationStore();
 
   const sendTextMessage = useMutation(api.messages.sendTextMessage);
@@ -71,19 +70,11 @@ const MessageInput = () => {
         </div>
         <div className="mr-4 flex items-center gap-3">
           {msgText.length > 0 ? (
-            <Button
-              type="submit"
-              size={"sm"}
-              className="bg-transparent text-foreground hover:bg-transparent"
-            >
+            <Button type="submit" size={"sm"} className="bg-transparent text-foreground hover:bg-transparent">
               <Send />
             </Button>
           ) : (
-            <Button
-              type="submit"
-              size={"sm"}
-              className="bg-transparent text-foreground hover:bg-transparent"
-            >
+            <Button type="submit" size={"sm"} className="bg-transparent text-foreground hover:bg-transparent">
               <Mic />
             </Button>
           )}

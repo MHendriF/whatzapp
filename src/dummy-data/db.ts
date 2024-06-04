@@ -25,8 +25,7 @@ export const conversations = [
     lastMessage: {
       _id: "2",
       messageType: "text",
-      content:
-        "Hey there! Hey there! How are you? What's up? How's it going? Fine, thanks!",
+      content: "Hey there! Hey there! How are you? What's up? How's it going? Fine, thanks!",
       sender: "user2",
     },
     sender: "user4",
@@ -51,8 +50,7 @@ export const conversations = [
   {
     _id: "4",
     admin: null,
-    groupImage:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png",
+    groupImage: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/2300px-React-icon.svg.png",
     groupName: null,
     participants: ["user8", "user9", "user10"],
     _creationTime: 1638243072, // Unix timestamp for 2021-11-30 15:04:32 UTC

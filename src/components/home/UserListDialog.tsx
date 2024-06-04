@@ -146,8 +146,7 @@ const UserListDialog = () => {
                 } else {
                   setSelectedUsers([...selectedUsers, user._id]);
                 }
-              }}
-            >
+              }}>
               <Avatar className="overflow-visible">
                 {user.isOnline && (
                   <div className="absolute top-0 right-0 w-2.5 h-2.5 bg-green-500 rounded-full border-2 border-foreground" />
@@ -171,8 +170,7 @@ const UserListDialog = () => {
           <Button variant={"outline"}>Cancel</Button>
           <Button
             onClick={handleCreateConversation}
-            disabled={selectedUsers.length === 0 || (selectedUsers.length > 1 && !groupName) || isLoading}
-          >
+            disabled={selectedUsers.length === 0 || (selectedUsers.length > 1 && !groupName) || isLoading}>
             {/* spinner */}
             {isLoading ? <div className="w-5 h-5 border-t-2 border-b-2  rounded-full animate-spin" /> : "Create"}
           </Button>

@@ -159,8 +159,7 @@ const MediaImageDialog = ({ isOpen, onClose, selectedImage, isLoading, handleSen
       open={isOpen}
       onOpenChange={(isOpen) => {
         if (!isOpen) onClose();
-      }}
-    >
+      }}>
       <DialogContent>
         <DialogDescription className="flex flex-col gap-10 justify-center items-center">
           {renderedImage && <Image src={renderedImage} width={300} height={300} alt="selected image" />}
@@ -189,8 +188,7 @@ const MediaVideoDialog = ({ isOpen, onClose, selectedVideo, isLoading, handleSen
       open={isOpen}
       onOpenChange={(isOpen) => {
         if (!isOpen) onClose();
-      }}
-    >
+      }}>
       <DialogContent>
         <DialogDescription>Video</DialogDescription>
         <div className="w-full">{renderedVideo && <ReactPlayer url={renderedVideo} controls width="100%" />}</div>

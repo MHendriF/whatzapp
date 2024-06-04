@@ -16,9 +16,7 @@ export const sendTextMessage = mutation({
 
     const user = await ctx.db
       .query("users")
-      .withIndex("by_tokenIdentifier", (q) =>
-        q.eq("tokenIdentifier", identity.tokenIdentifier)
-      )
+      .withIndex("by_tokenIdentifier", (q) => q.eq("tokenIdentifier", identity.tokenIdentifier))
       .unique();
 
     if (!user) {
@@ -92,9 +90,7 @@ export const getMessages = query({
 
     const messages = await ctx.db
       .query("messages")
-      .withIndex("by_conversation", (q) =>
-        q.eq("conversation", args.conversation)
-      )
+      .withIndex("by_conversation", (q) => q.eq("conversation", args.conversation))
       .collect();
 
     const userProfileCache = new Map();
@@ -102,8 +98,7 @@ export const getMessages = query({
     const messagesWithSender = await Promise.all(
       messages.map(async (message) => {
         if (message.sender === "ChatGPT") {
-          const image =
-            message.messageType === "text" ? "/gpt.png" : "dall-e.png";
+          const image = message.messageType === "text" ? "/gpt.png" : "dall-e.png";
           return { ...message, sender: { name: "ChatGPT", image } };
         }
         let sender;
@@ -121,7 +116,7 @@ export const getMessages = query({
         }
 
         return { ...message, sender };
-      })
+      }),
     );
 
     return messagesWithSender;
