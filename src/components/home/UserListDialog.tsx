@@ -18,6 +18,7 @@ import { ImageIcon, MessageSquareDiff } from "lucide-react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import toast from "react-hot-toast";
 
 const UserListDialog = () => {
   const [selectedUsers, setSelectedUsers] = useState<Id<"users">[]>([]);
@@ -38,7 +39,6 @@ const UserListDialog = () => {
   const handleCreateConversation = async () => {
     if (setSelectedUsers.length === 0) return;
     setIsLoading(true);
-    // TODO: create conversation
     try {
       const isGroup = selectedUsers.length > 1;
       let conversationId;
@@ -67,8 +67,14 @@ const UserListDialog = () => {
       }
       dialogCloseRef.current?.click();
       setSelectedUsers([]);
-    } catch (error) {}
-    setIsLoading(false);
+      setGroupName("");
+      setSelectedImage(null);
+    } catch (error) {
+      toast.error("Failed to create conversation");
+      console.error(error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -190,7 +196,4 @@ const UserListDialog = () => {
     </Dialog>
   );
 };
-console.log("🚀 ~ UserListDialog ~ console:", console);
-console.log("🚀 ~ UserListDialog ~ UserListDialog:", UserListDialog);
-console.log("🚀 ~ UserListDialog ~ UserListDialog:", UserListDialog);
 export default UserListDialog;
