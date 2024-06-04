@@ -39,6 +39,24 @@ export const updateUser = internalMutation({
   },
 });
 
+export const deleteUser = internalMutation({
+  args: { tokenIdentifier: v.string() },
+  async handler(ctx, args) {
+    const user = await ctx.db
+      .query("users")
+      .withIndex("by_tokenIdentifier", (q) =>
+        q.eq("tokenIdentifier", args.tokenIdentifier)
+      )
+      .unique();
+
+    if (!user) {
+      throw new ConvexError("User not found");
+    }
+
+    await ctx.db.delete(user._id);
+  },
+});
+
 export const setUserOnline = internalMutation({
   args: { tokenIdentifier: v.string() },
   handler: async (ctx, args) => {
