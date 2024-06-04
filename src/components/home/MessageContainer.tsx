@@ -1,4 +1,3 @@
-import { messages } from "@/dummy-data/db";
 import ChatBubble from "./ChatBubble";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
@@ -17,7 +16,11 @@ const MessageContainer = () => {
       <div className="mx-12 flex flex-col gap-3 h-full">
         {messages?.map((message, idx) => (
           <div key={message._id}>
-            <ChatBubble message={message} me={me} />
+            <ChatBubble
+              message={message}
+              me={me}
+              previousMessage={idx > 0 ? messages?.[idx - 1] : undefined}
+            />
           </div>
         ))}
       </div>

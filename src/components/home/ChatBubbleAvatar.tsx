@@ -14,9 +14,8 @@ const ChatBubbleAvatar = ({
   message,
   fromAI,
 }: ChatBubbleAvatarProps) => {
-  //if (!isGroup && !fromAI) return null;
+  if (!isGroup && !fromAI) return null;
   console.log("🚀 ~ message:", message);
-  //if (!isGroup) return null;
 
   return (
     <Avatar className="overflow-visible relative">
