@@ -6,6 +6,7 @@ import ReactPlayer from "react-player";
 import Image from "next/image";
 import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
 import { useState } from "react";
+import ChatAvatarActions from "./ChatAvatarActions";
 
 type ChatBubbleProps = {
   message: any;
@@ -47,6 +48,7 @@ const ChatBubble = ({ message, me, previousMessage }: ChatBubbleProps) => {
           <ChatBubbleAvatar isGroup={isGroup} isMember={isMember} message={message} />
           <div className={`flex flex-col z-20 max-w-fit px-2 pt-1 rounded-md shadow-md relative ${bgClass}`}>
             <OtherMessageIndicator />
+            {isGroup && <ChatAvatarActions message={message} me={me} />}
             {renderMessageContent()}
             {isOpen && <ImageDialog src={message.content} open={isOpen} onClose={() => setIsOpen(false)} />}
             <MessageTime time={time} fromMe={fromMe} />
