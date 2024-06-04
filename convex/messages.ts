@@ -60,6 +60,15 @@ export const sendTextMessage = mutation({
         conversation: args.conversation,
       });
     }
+
+    if (args.content.startsWith("@gemini")) {
+      // Schedule the chat action to run immediately
+      console.log("🚀 ~ @gemini: run api.geminiai.chat :", args.content);
+      await ctx.scheduler.runAfter(0, api.geminiai.chat, {
+        messageBody: args.content,
+        conversation: args.conversation,
+      });
+    }
   },
 });
 
@@ -73,6 +82,22 @@ export const sendChatGPTMessage = mutation({
     await ctx.db.insert("messages", {
       content: args.content,
       sender: "ChatGPT",
+      messageType: args.messageType,
+      conversation: args.conversation,
+    });
+  },
+});
+
+export const sendChatGeminiMessage = mutation({
+  args: {
+    content: v.string(),
+    conversation: v.id("conversations"),
+    messageType: v.union(v.literal("text"), v.literal("image")),
+  },
+  handler: async (ctx, args) => {
+    await ctx.db.insert("messages", {
+      content: args.content,
+      sender: "GeminiAI",
       messageType: args.messageType,
       conversation: args.conversation,
     });
@@ -102,6 +127,10 @@ export const getMessages = query({
         if (message.sender === "ChatGPT") {
           const image = message.messageType === "text" ? "/gpt.png" : "dall-e.png";
           return { ...message, sender: { name: "ChatGPT", image } };
+        }
+        if (message.sender === "GeminiAI") {
+          const image = message.messageType === "text" ? "/gemini-icon.png" : "gemini-icon.png";
+          return { ...message, sender: { name: "GeminiAI", image } };
         }
         let sender;
         // Check if sender profile is in cache
