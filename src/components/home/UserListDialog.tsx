@@ -34,7 +34,6 @@ const UserListDialog = () => {
   const generateUploadUrl = useMutation(api.conversations.generateUploadUrl);
   const me = useQuery(api.users.getMe);
   const users = useQuery(api.users.getUsers);
-  console.log("🚀 ~ UserListDialog ~ users:", users);
 
   const handleCreateConversation = async () => {
     if (setSelectedUsers.length === 0) return;
@@ -51,24 +50,31 @@ const UserListDialog = () => {
         const postUrl = await generateUploadUrl();
         const result = await fetch(postUrl, {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": selectedImage?.type! },
           body: selectedImage,
         });
 
         const { storageId } = await result.json();
-        await createConversation({
+        conversationId = await createConversation({
           participants: [...selectedUsers, me?._id!],
           isGroup: true,
+          admin: me?._id!,
           groupName,
           groupImage: storageId,
         });
       }
+      console.log("🚀 ~ UserListDialog ~ users:", users);
+
       dialogCloseRef.current?.click();
       setSelectedUsers([]);
       setGroupName("");
       setSelectedImage(null);
+      toast.success("Conversation created");
+
+      // TODO => Update a global state called "selectedConversation"
+      const conversationName = isGroup
+        ? groupName
+        : users?.find((user) => user._id === selectedUsers[0])?.name;
     } catch (error) {
       toast.error("Failed to create conversation");
       console.error(error);

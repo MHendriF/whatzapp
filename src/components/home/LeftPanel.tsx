@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import { Input } from "../ui/input";
 import ThemeSwitch from "./ThemeSwitch";
-import { conversations } from "@/dummy-data/db";
 import Conversation from "./Conversation";
 import { UserButton } from "@clerk/nextjs";
 import UserListDialog from "./UserListDialog";
