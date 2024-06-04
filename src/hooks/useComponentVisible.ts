@@ -6,11 +6,8 @@ interface ComponentVisibleHook {
   setIsComponentVisible: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export default function useComponentVisible(
-  initialIsVisible: boolean
-): ComponentVisibleHook {
-  const [isComponentVisible, setIsComponentVisible] =
-    useState(initialIsVisible);
+export default function useComponentVisible(initialIsVisible: boolean): ComponentVisibleHook {
+  const [isComponentVisible, setIsComponentVisible] = useState(initialIsVisible);
   const ref = useRef<any>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
