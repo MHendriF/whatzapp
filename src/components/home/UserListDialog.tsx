@@ -38,7 +38,7 @@ const UserListDialog = () => {
   const { setSelectedConversation } = useConversationStore();
 
   const handleCreateConversation = async () => {
-    if (setSelectedUsers.length === 0) return;
+    if (selectedUsers.length === 0) return;
     setIsLoading(true);
     try {
       const isGroup = selectedUsers.length > 1;
@@ -92,9 +92,7 @@ const UserListDialog = () => {
   useEffect(() => {
     if (!selectedImage) return setRenderedImage("");
     const reader = new FileReader();
-    reader.onload = (e) => {
-      setRenderedImage(e.target?.result as string);
-    };
+    reader.onload = (e) => setRenderedImage(e.target?.result as string);
     reader.readAsDataURL(selectedImage);
   }, [selectedImage]);
 
