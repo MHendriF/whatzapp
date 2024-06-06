@@ -29,7 +29,7 @@ const UserListDialog = () => {
   const [renderedImage, setRenderedImage] = useState("");
 
   const imgRef = useRef<HTMLInputElement>(null);
-  const dialogCloseRef = useRef<HTMLInputElement>(null);
+  const dialogCloseRef = useRef<HTMLButtonElement>(null);
 
   const createConversation = useMutation(api.conversations.createConversation);
   const generateUploadUrl = useMutation(api.conversations.generateUploadUrl);
@@ -121,7 +121,7 @@ const UserListDialog = () => {
           accept="image/*"
           ref={imgRef}
           hidden
-          onChange={(e) => setSelectedImage(e.target.files?.[0])}
+          onChange={(e) => setSelectedImage(e.target.files?.[0] || null)}
         />
         {selectedUsers.length > 1 && (
           <>

@@ -60,7 +60,7 @@ export const chat = action({
   },
 });
 
-async function run(prompt) {
+async function run(prompt: string) {
   const chatSession = model.startChat({
     generationConfig,
     safetySettings,
