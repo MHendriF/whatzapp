@@ -44,19 +44,15 @@ export const chat = action({
     conversation: v.id("conversations"),
   },
   handler: async (ctx, args) => {
-    console.log("🚀 ~ handler: ~ args:", args.messageBody);
     const res = await run(args.messageBody);
-    console.log("🚀 ~ handler: ~ res:", res);
 
     const messageContent = res;
-    console.log("🚀 ~ handler: ~ messageContent:", messageContent);
 
     const resMutation = await ctx.runMutation(api.messages.sendChatGeminiMessage, {
       content: messageContent ?? "I'm sorry, I don't have a response for that",
       conversation: args.conversation,
       messageType: "text",
     });
-    console.log("🚀 ~ handler: ~ resMutation:", resMutation);
   },
 });
 
@@ -68,7 +64,6 @@ async function run(prompt: string) {
   });
 
   const result = await chatSession.sendMessage(prompt);
-  console.log("result: ", result);
   return result.response.text();
 }
 

@@ -4,10 +4,8 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const userID = url.searchParams.get("userID")!;
 
-  const appID = +process.env.ZEGO_APP_ID!;
-  console.log("🚀 ~ GET ~ appID:", appID);
-  const serverSecret = process.env.ZEGO_SERVER_SECRET!;
-  console.log("🚀 ~ GET ~ serverSecret:", serverSecret);
+  const appID = +process.env.NEXT_PUBLIC_ZEGO_APP_ID!;
+  const serverSecret = process.env.NEXT_PUBLIC_ZEGO_SERVER_SECRET!;
 
   const effectiveTimeInSeconds = 3600;
 

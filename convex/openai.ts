@@ -25,7 +25,6 @@ export const chat = action({
         },
       ],
     });
-    console.log("🚀 ~ handler: ~ res:", res);
 
     const messageContent = res.choices[0].message.content;
 
@@ -34,7 +33,6 @@ export const chat = action({
       conversation: args.conversation,
       messageType: "text",
     });
-    console.log("🚀 ~ handler: ~ resMutation:", resMutation);
   },
 });
 

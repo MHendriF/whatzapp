@@ -117,11 +117,11 @@ export function generateToken04(
 
   // Convert token information to json
   const plaintText = JSON.stringify(tokenInfo);
-  console.log("plain text: ", plaintText);
+  //console.log("plain text: ", plaintText);
 
   // A randomly generated 16-byte string used as the AES encryption vector, which is Base64 encoded with the ciphertext to generate the final token
   const iv: string = makeRandomIv();
-  console.log("iv", iv);
+  //console.log("iv", iv);
 
   // Encrypt
   const encryptBuf = aesEncrypt(plaintText, secret, iv);
