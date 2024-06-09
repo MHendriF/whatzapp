@@ -23,4 +23,5 @@ const ChatBubbleAvatar = ({ isGroup, isMember, message, fromAI }: ChatBubbleAvat
     </Avatar>
   );
 };
+
 export default ChatBubbleAvatar;

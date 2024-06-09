@@ -8,11 +8,8 @@ export async function GET(req: Request) {
   const serverSecret = process.env.NEXT_PUBLIC_ZEGO_SERVER_SECRET!;
 
   const effectiveTimeInSeconds = 3600;
-
   const payload = "";
-
   const token = generateToken04(appID, userID, serverSecret, effectiveTimeInSeconds, payload);
-  console.log("🚀 ~ GET ~ token:", token);
 
   return Response.json({ token, appID });
 }

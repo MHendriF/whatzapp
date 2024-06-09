@@ -132,6 +132,7 @@ export const getMessages = query({
           const image = message.messageType === "text" ? "/gemini-icon.png" : "gemini-icon.png";
           return { ...message, sender: { name: "GeminiAI", image } };
         }
+
         let sender;
         // Check if sender profile is in cache
         if (userProfileCache.has(message.sender)) {
